@@ -1,17 +1,20 @@
-import { Component } from '@angular/core';
+import {Component, signal} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import {NavbarComponent} from "./shared/navbar.component";
+import {MeteoComponent} from "./meteo.component";
+import {FooterComponent} from "./shared/footer.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, NavbarComponent, MeteoComponent, FooterComponent],
   template: `
-    <h1>Welcome to {{title}}!</h1>
-
-    <router-outlet />
+    <app-navbar (cityEmit)="city.set($event)"/>
+    <app-meteo [city]="city()"/>
+    <app-footer/>
   `,
   styles: [],
 })
 export class AppComponent {
-  title = 'meteoAngular';
+  city = signal('');
 }
