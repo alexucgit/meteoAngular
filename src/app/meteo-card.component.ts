@@ -1,4 +1,4 @@
-import {booleanAttribute, Component, input} from '@angular/core';
+import {Component, input} from '@angular/core';
 import {DatePipe} from "@angular/common";
 
 @Component({
