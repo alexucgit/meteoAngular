@@ -18,17 +18,17 @@ export class ToggleThemeComponent implements OnInit {
   ngOnInit() {
     if ((!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)){
       document.documentElement.classList.add('dark')
-      localStorage.setItem('theme', 'dark')
+      window.localStorage.setItem('theme', 'dark')
     }
   }
 
   cambia(){
     if ((!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
       document.documentElement.classList.add('dark')
-      localStorage.setItem('theme', 'dark')
+      window.localStorage.setItem('theme', 'dark')
     } else {
       document.documentElement.classList.remove('dark')
-      localStorage.removeItem('theme')
+      window.localStorage.removeItem('theme')
     }
   }
 }
