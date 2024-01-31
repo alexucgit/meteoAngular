@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Output} from '@angular/core';
 import {ToggleThemeComponent} from "./toggle-theme.component";
-import {FormControl, ReactiveFormsModule, Validators} from "@angular/forms";
+import {FormControl, ReactiveFormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-navbar',
@@ -27,5 +27,5 @@ import {FormControl, ReactiveFormsModule, Validators} from "@angular/forms";
 })
 export class NavbarComponent {
   @Output('cityEmit') cityEmit = new EventEmitter<string>();
-  city = new FormControl('copertino')
+  city = new FormControl('')
 }
