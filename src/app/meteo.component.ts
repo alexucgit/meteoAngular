@@ -15,12 +15,12 @@ import {MeteoCardComponent} from "./meteo-card.component";
   ],
   template: `
     <div class="md:container md:mx-auto p-10">
-      @if (loading()){
+      @if (loading){
         <div class="flex justify-center">
           <span class="loading loading-ring loading-lg"></span>
         </div>
       }
-      @if(!error() && !loading()){
+      @if(!error() && !loading){
         @if (meteo(); as meteo) {
           <div class="border border-1 dark:border-slate-700 dark:bg-slate-700 dark:hover:bg-sky-700 hover:bg-gray-200 rounded-2xl w-full flex-wrap p-5 flex items-center justify-between">
             <div class="flex flex-col items-center md:w-1/2 w-full  justify-center">
@@ -114,25 +114,25 @@ export class MeteoComponent {
   city = input.required<string>();
   meteo = signal<Meteo | null>(null)
   error = signal<string | null>(null);
-  loading = signal<boolean>(false);
+  loading = false;
   http = inject(HttpClient)
   constructor() {
     effect(() => {
       if(this.city() === '') return;
-      this.loading.update(u => !u);
+      this.loading = true;
       this.http.get<Meteo>('https://api.weatherapi.com/v1/forecast.json?q=' + this.city() + '&days=3&lang=it&key=' + environment.apiKeyMeteo).subscribe({
         next: res => {
           this.meteo.set(res);
           this.error.set(null);
-          this.loading.update(u => !u)
+          this.loading = false;
         },
         error: err => {
           this.meteo.set(null)
           this.error.set(err.error.error.message)
-          this.loading.update(u => !u)
+          this.loading = false;
         }
       })
       console.log("richiamo endpoint con city ", this.city())
-    }, {allowSignalWrites: true});
+    });
   }
 }
