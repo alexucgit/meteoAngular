@@ -1,4 +1,4 @@
-import {Component, effect, inject, input, signal} from '@angular/core';
+import {Component, computed, effect, inject, input, signal} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../environments/environment.development";
 import {Meteo} from "./model/Meteo";
@@ -144,6 +144,9 @@ export class MeteoComponent {
   isError = false;
   loading = false;
   http = inject(HttpClient)
+  cityList = computed(() => {
+
+  })
   constructor() {
     effect(() => {
       if(this.city() === '') return;

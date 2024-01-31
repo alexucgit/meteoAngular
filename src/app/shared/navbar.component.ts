@@ -1,31 +1,56 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, inject, Output, signal} from '@angular/core';
 import {ToggleThemeComponent} from "./toggle-theme.component";
 import {FormControl, ReactiveFormsModule} from "@angular/forms";
+import {HttpClient} from "@angular/common/http";
+import {JsonPipe} from "@angular/common";
+import {CityList} from "../model/CityList";
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
   imports: [
     ToggleThemeComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    JsonPipe
   ],
   template: `
     <div class="navbar dark:bg-slate-700 bg-yellow-200 flex items-center justify-between gap-2">
       <span class="btn btn-ghost text-xl font-bold">ngMeteo</span>
       <div class="flex gap-2">
-        <input type="text" placeholder="Milano..." class="input input-sm" [formControl]="city" (keydown.enter)="cityEmit.emit(city.value!)" />
-        <!--<button class="btn btn-square dark:btn-ghost btn-ghost btn-sm dark:disabled:bg-slate-800 disabled:text-white" (click)="cityEmit.emit(city.value!)" [disabled]="!city.value">
-          <svg class="w-4 h-4 dark:text-white text-neutral disabled:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-            <path stroke="currentColor" stroke-linecap="round" stroke-width="2" d="m21 21-3.5-3.5M17 10a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z"/>
-          </svg>
-        </button>-->
+        <input type="text" placeholder="Milano..." class="input input-sm" [formControl]="city" (keydown.enter)="cityEmit.emit(city.value!)" (keydown)="search()"/>
       </div>
       <div><app-toggle-theme/></div>
+    </div>
+    <div class="w-full flex flex-col" style="z-index: 10000; position: fixed; left:0; top:60px">
+      @for (city of cityList(); track city.id){
+        <div class="border border-1 border-slate-700 bg-neutral p-5 text-center" (click)="selectCity(city.name)">
+          <p>{{city.name}}</p>
+          <p class="text-sm">{{city.country}} - {{city.region}}</p>
+        </div>
+      }
     </div>
   `,
   styles: ``
 })
 export class NavbarComponent {
   @Output('cityEmit') cityEmit = new EventEmitter<string>();
+  http = inject(HttpClient);
   city = new FormControl('')
+  cityList = signal<CityList[]>([]);
+
+  search(){
+    if(this.city.value && this.city.value?.length > 3) {
+      this.http.get<CityList[]>('https://api.weatherapi.com/v1/search.json?q=' + this.city.value + '&key=195d83a3dda745c99b9202810242901').subscribe({
+        next: res => this.cityList.set(res)
+      })
+    } else {
+      this.cityList.set([]);
+    }
+  }
+
+  selectCity(city: string){
+    this.city.setValue(city);
+    this.cityEmit.emit(city);
+    this.cityList.set([])
+  }
 }
