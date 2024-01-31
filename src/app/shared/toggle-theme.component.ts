@@ -16,32 +16,15 @@ import {Component, effect, signal} from '@angular/core';
 export class ToggleThemeComponent {
   isDarkMode = signal<boolean>(false);
   constructor() {
+    console.log(this.isDarkMode())
     effect(() => {
       if (!this.isDarkMode()) {
         document.documentElement.setAttribute("data-theme", "dark");
         document.documentElement.classList.add('dark')
-        window.localStorage.setItem('theme', 'dark')
       } else {
         document.documentElement.removeAttribute("data-theme");
-
         document.documentElement.classList.remove('dark')
-        window.localStorage.removeItem('theme')
       }
     });
   }
-  /**
-  ngOnInit() {
-      document.documentElement.classList.add('dark')
-      window.localStorage.setItem('theme', 'dark')
-  }
-
-  cambia(){
-    if ((!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-      document.documentElement.classList.add('dark')
-      window.localStorage.setItem('theme', 'dark')
-    } else {
-      document.documentElement.classList.remove('dark')
-      window.localStorage.removeItem('theme')
-    }
-  }**/
 }
