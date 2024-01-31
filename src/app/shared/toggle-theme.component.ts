@@ -16,10 +16,8 @@ import {Component, OnInit} from '@angular/core';
 export class ToggleThemeComponent implements OnInit {
 
   ngOnInit() {
-    if ((!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)){
       document.documentElement.classList.add('dark')
       window.localStorage.setItem('theme', 'dark')
-    }
   }
 
   cambia(){
