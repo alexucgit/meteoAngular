@@ -23,7 +23,7 @@ import {CityList} from "../model/CityList";
     </div>
     <div class="w-full flex flex-col" style="z-index: 10000; position: fixed; left:0; top:60px">
       @for (city of cityList(); track city.id){
-        <div class="border border-1 border-slate-700 bg-neutral p-5 text-center" (click)="selectCity(city.name)">
+        <div class="border border-1 dark:bg-slate-700 dark:border-slate-800 bg-yellow-100 border-yellow-300 p-5 text-center" (click)="selectCity(city.name)">
           <p>{{city.name}}</p>
           <p class="text-sm">{{city.country}} - {{city.region}}</p>
         </div>
