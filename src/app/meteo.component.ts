@@ -69,12 +69,25 @@ import {MeteoCardComponent} from "./meteo-card.component";
             </div>
           </div>
           <div class="mt-5 w-full flex-wrap flex items-center justify-between">
-            @for (fore of meteo.forecast.forecastday; track $index) {
+            @for (fore of meteo.forecast.forecastday; track $index;) {
               <div class="w-full sm:w-1/3 p-1">
                 <div class="flex flex-col items-center w-full justify-center rounded-2xl p-3">
                   <img [ngSrc]="fore.day.condition.icon" [alt]="fore.day.condition.text" height="64" width="64"/>
                   <span class="font-bold">{{ fore.day.condition.text }}</span>
-                  <span class="text-sm">{{ fore.date | date: 'dd/MM/yyyy' }}</span>
+                  <span class="text-sm">
+                    @switch ($index) {
+                      @case (0) {
+                        <span class="font-bold dark:text-yellow-500">Oggi, </span>
+                      }
+                      @case (1) {
+                        <span class="font-bold">Domani, </span>
+                      }
+                      @case (2) {
+                        <span class="font-bold">Dopodomani, </span>
+                      }
+                    }
+                    {{ fore.date | date: 'dd/MM/yyyy' }}
+                  </span>
                   <div class="flex gap-2">
                     <div class="flex">
                       <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true"
