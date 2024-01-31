@@ -16,7 +16,6 @@ import {Component, effect, signal} from '@angular/core';
 export class ToggleThemeComponent {
   isDarkMode = signal<boolean>(false);
   constructor() {
-    console.log(this.isDarkMode())
     effect(() => {
       if (!this.isDarkMode()) {
         document.documentElement.setAttribute("data-theme", "dark");
