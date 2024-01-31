@@ -22,7 +22,7 @@ import {MeteoCardComponent} from "./meteo-card.component";
       }
       @if(!error() && !loading){
         @if (meteo(); as meteo) {
-          <div class="border border-1 dark:border-slate-700 dark:bg-slate-700 dark:hover:bg-sky-700 hover:bg-gray-200 rounded-2xl w-full flex-wrap p-5 flex items-center justify-between">
+          <div class="border border-1 dark:border-slate-700 dark:bg-slate-700 dark:hover:bg-sky-700 hover:bg-gray-200 rounded-2xl w-full flex-wrap p-5 flex items-center justify-between shadow-[0_0px_60px_-15px_rgba(0,0,0,0.3)]">
             <div class="flex flex-col items-center md:w-1/2 w-full  justify-center">
               <p class="text-2xl font-bold text-center">{{meteo.location.name}}</p>
               <p class="text-normal">{{meteo.location.region}} - {{meteo.location.country}}</p>
@@ -92,7 +92,7 @@ import {MeteoCardComponent} from "./meteo-card.component";
           </div>
         } @else {
           <div class="">
-            <div class="border border-1 dark:border-sky-800 rounded-2xl mt-5 w-full p-5 flex flex-col justify-center items-center gap-3">
+            <div class="border border-1 dark:border-sky-800 rounded-2xl mt-5 w-full p-5 flex flex-col justify-center items-center gap-3 shadow-[0_0px_60px_-15px_rgba(0,0,0,0.3)]">
               <svg class="w-6 h-6 text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                 <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 11h2v5m-2 0h4m-2.6-8.5h0M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/>
               </svg>

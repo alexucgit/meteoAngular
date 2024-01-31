@@ -5,7 +5,7 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   template: `
-    <footer class="container mx-auto p-0">
+    <footer class="container mx-auto p-0 mb-10">
       <aside class="flex flex-wrap justify-between sm:flex-row gap-5">
         <div class="flex flex-col gap-2 items-center justify-center w-full">
           <div class="flex items-center justify-center gap-8 mt-3">

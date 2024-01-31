@@ -27,5 +27,5 @@ import {FormControl, ReactiveFormsModule, Validators} from "@angular/forms";
 })
 export class NavbarComponent {
   @Output('cityEmit') cityEmit = new EventEmitter<string>();
-  city = new FormControl('')
+  city = new FormControl('copertino')
 }
