@@ -17,7 +17,7 @@ import {CityList} from "../model/CityList";
     <div class="navbar dark:bg-slate-700 bg-yellow-200 flex items-center justify-between gap-2">
       <span class="btn btn-ghost text-xl font-bold">ngMeteo</span>
       <div class="flex gap-2">
-        <input type="text" placeholder="Milano..." class="input input-sm" [formControl]="city" (keydown.enter)="cityEmit.emit(city.value!)" (keydown)="search()"/>
+        <input type="text" placeholder="Milano..." class="input input-sm" [formControl]="city" (keydown.enter)="cityEmit.emit(city.value!)"/>
       </div>
       <div><app-toggle-theme/></div>
     </div>
