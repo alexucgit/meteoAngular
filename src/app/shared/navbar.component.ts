@@ -25,7 +25,7 @@ import {CityList} from "../model/CityList";
       @for (city of cityList(); track city.id){
         <div class="border border-1 dark:bg-slate-700 dark:border-slate-800 bg-yellow-100 border-yellow-300 p-5 text-center" (click)="selectCity(city.name)">
           <p>{{city.name}}</p>
-          <p class="text-sm">{{city.country}} - {{city.region}}</p>
+          <p class="text-sm">{{city.country}} - {{city.region}}</p><span></span>
         </div>
       }
     </div>
