@@ -17,6 +17,7 @@ import {CityList} from "../model/CityList";
     <div class="navbar dark:bg-slate-700 bg-yellow-200 flex items-center justify-between gap-2">
       <span class="btn btn-ghost text-xl font-bold">ngMeteo</span>
       <div class="flex gap-2">
+        <!--<input type="text" placeholder="Milano..." class="input input-sm" [formControl]="city" (keydown.enter)="cityEmit.emit(city.value!)" (keydown)="search()"/>-->
         <input type="text" placeholder="Milano..." class="input input-sm" [formControl]="city" (keydown.enter)="cityEmit.emit(city.value!)"/>
       </div>
       <div><app-toggle-theme/></div>
@@ -38,6 +39,8 @@ export class NavbarComponent {
   city = new FormControl('')
   cityList = signal<CityList[]>([]);
 
+  /**
+   * Metodo commentato, da usare decommentando il campo input col keydown
   search(){
     if(this.city.value && this.city.value?.length > 3) {
       this.http.get<CityList[]>('https://api.weatherapi.com/v1/search.json?q=' + this.city.value + '&key=195d83a3dda745c99b9202810242901').subscribe({
@@ -46,7 +49,7 @@ export class NavbarComponent {
     } else {
       this.cityList.set([]);
     }
-  }
+  }**/
 
   selectCity(city: string){
     this.city.setValue(city);
