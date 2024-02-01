@@ -35,12 +35,12 @@ import {CityList} from "../model/CityList";
 })
 export class NavbarComponent {
   @Output('cityEmit') cityEmit = new EventEmitter<string>();
-  http = inject(HttpClient);
+  // http = inject(HttpClient);
   city = new FormControl('')
   cityList = signal<CityList[]>([]);
 
   /**
-   * Metodo commentato, da usare decommentando il campo input col keydown
+   * Metodo commentato, da usare decommentando il campo input col keydown e l'inject http
   search(){
     if(this.city.value && this.city.value?.length > 3) {
       this.http.get<CityList[]>('https://api.weatherapi.com/v1/search.json?q=' + this.city.value + '&key=195d83a3dda745c99b9202810242901').subscribe({
